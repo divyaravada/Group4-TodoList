@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./DivyaTodoList.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const DivyaTodoList = () => {
-  const [todos, setTodos] = React.useState([]);
-  const [todo, setTodo] = React.useState("");
-  const [todoEditing, setTodoEditing] = React.useState(null);
-  const [editingText, setEditingText] = React.useState("");
+  const [todos, setTodos] = useState([]);
+  const [todo, setTodo] = useState("");
+  const [todoEditing, setTodoEditing] = useState(null);
+  const [editingText, setEditingText] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     const json = localStorage.getItem("todos");
     const loadedTodos = JSON.parse(json);
     if (loadedTodos) {
@@ -15,7 +16,7 @@ const DivyaTodoList = () => {
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const json = JSON.stringify(todos);
     localStorage.setItem("todos", json);
   }, [todos]);
@@ -67,7 +68,9 @@ const DivyaTodoList = () => {
           onChange={(e) => setTodo(e.target.value)}
           value={todo}
         />
-        <button type="submit">Add Todo</button>
+        <button className="btn btn-outline-warning" type="submit">
+          Add Todo
+        </button>
       </form>
       {todos.map((todo) => (
         <div key={todo.id} className="todo">
@@ -87,14 +90,29 @@ const DivyaTodoList = () => {
               <div>{todo.text}</div>
             )}
           </div>
-          <div className="todo-actions">
+          <div className="border-success todo-actions">
             {todo.id === todoEditing ? (
-              <button onClick={() => submitEdits(todo.id)}>Submit Edits</button>
+              <button
+                className="btn btn-outline-success"
+                onClick={() => submitEdits(todo.id)}
+              >
+                Submit Edits
+              </button>
             ) : (
-              <button onClick={() => setTodoEditing(todo.id)}>Edit</button>
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => setTodoEditing(todo.id)}
+              >
+                Edit
+              </button>
             )}
 
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <button
+              className="btn btn-outline-danger"
+              onClick={() => deleteTodo(todo.id)}
+            >
+              Delete
+            </button>
           </div>
         </div>
       ))}

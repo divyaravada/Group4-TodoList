@@ -2,6 +2,8 @@ import React from "react";
 import { Tabs, TabList, TabPanel, Tab } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import DivyaTodoList from "./Divya/DivyaTodoList";
+import FranTodoList from "./Fran/FranTodoList";
+import KaiTodoList from "./Kai/KaiTodoList";
 //import TodoInput from "./TodoInput";
 
 export default function MyTabs() {
@@ -14,12 +16,10 @@ export default function MyTabs() {
       </TabList>
 
       <TabPanel>
-        <div>
-          <h4>Home ToDoo List</h4>
-        </div>
+        <KaiTodoList />
       </TabPanel>
       <TabPanel>
-        <div>Family ToDoo List</div>
+        <FranTodoList />
       </TabPanel>
       <TabPanel>
         <DivyaTodoList />
